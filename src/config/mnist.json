@@ -1,0 +1,8 @@
+{
+  "pick_reshape": {"y": [1, 10], "x": [1, 28, 28, 1]},
+  "output_dim": [null, 10],
+  "netName": "mnist",
+  "input_dim": [null, 28, 28, 1],
+  "name": "mnist",
+  "multi-label":true
+}

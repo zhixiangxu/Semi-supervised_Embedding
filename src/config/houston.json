@@ -1,0 +1,16 @@
+{
+  "pick_reshape": {"y": [1, 15], "x": [1, 144]},
+  "output_dim": [null, 15],
+  "netName_label": "houston1_l",
+  "netName_neighbor": "houston1_u",
+  "netName_unlabel": "houston1_u",
+  "input_dim": [null, 144],
+  "name": "houston",
+  "multi-label":true,
+  "scale":true,
+  "supervise only":false,
+  "dataset_shape": [349, 1905],
+  "data_shape": 144,
+  "shape": [349, 1905, 144],
+  "nb_class": 15
+}

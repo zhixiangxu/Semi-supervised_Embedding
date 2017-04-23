@@ -1,0 +1,49 @@
+digraph G {
+    node [shape=box]
+	subgraph cluster_embedding {
+		label = "shared layers";
+		color=red;
+        "convolutional_a1" -> "activation_a1";
+        "activation_a1" -> "maxpooling_a1";
+	}
+
+	subgraph cluster_supervised {
+		label = "labeled data";
+        color = red;
+        "convolutional_b1" -> "activation_b1";
+        "activation_b1" -> "maxpooling_b1";
+        "maxpooling_b1" -> "flatten_b1";
+        "flatten_b1" -> "dense_b1";
+        "dense_b1" -> "activation_b2";
+        "activation_b2" -> "dense_b2";
+        "dense_b2" -> "softmax_b1";
+        "softmax_b1" -> "absolute quadratic loss";
+	}
+
+    subgraph cluster_unsupervised {
+		label = "unlabeled embedding space: neighbor and random";
+        color = red;
+        "convolutional_c1" -> "activation_c1";
+        "activation_c1" -> "maxpooling_c1";
+        "maxpooling_c1" -> "flatten_c1";
+        "flatten_c1" -> "dense_c1";
+        "dense_c1" -> "activation_c2";
+        "activation_c2" -> "dense_c2";
+        "dense_c2" -> "softmax_c1";
+        "softmax_c1" -> "Laplacian Eigenmap loss";
+        "softmax_c1" -> "S3 Vector Machine loss";
+    }
+
+    "input" -> "convolutional_a1";
+    
+    "maxpooling_a1" -> "convolutional_b1";
+    "maxpooling_a1" -> "convolutional_c1";
+
+    "Laplacian Eigenmap loss" -> "loss";
+    "S3 Vector Machine loss" -> "loss";
+    "absolute quadratic loss" -> "loss";
+
+    "Laplacian Eigenmap loss" [shape=oval];
+    "S3 Vector Machine loss" [shape=oval];
+    "absolute quadratic loss" [shape=oval];
+}

@@ -1,0 +1,16 @@
+{
+  "pick_reshape": {"y": [1, 16], "x": [1, 200]},
+  "output_dim": [null, 16],
+  "netName_label": "indian1_l",
+  "netName_neighbor": "indian1_u",
+  "netName_unlabel": "indian1_u",
+  "input_dim": [null, 200],
+  "name": "indian",
+  "multi-label":true,
+  "scale":true,
+  "supervise only":false,
+  "dataset_shape": [145, 145],
+  "data_shape": 200,
+  "shape": [145, 145, 200],
+  "nb_class": 16
+}

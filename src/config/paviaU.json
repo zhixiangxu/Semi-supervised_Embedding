@@ -1,0 +1,16 @@
+{
+  "pick_reshape": {"y": [1, 9], "x": [1, 103]},
+  "output_dim": [null, 9],
+  "netName_label": "paviaU2_l",
+  "netName_neighbor": "paviaU2_u",
+  "netName_unlabel": "paviaU2_u",
+  "input_dim": [null, 103],
+  "name": "paviaU",
+  "multi-label":true,
+  "scale":true,
+  "supervise only":false,
+  "dataset_shape": [610, 340],
+  "data_shape": 103,
+  "shape": [610, 340, 103],
+  "nb_class": 9
+}

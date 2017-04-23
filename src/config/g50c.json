@@ -1,0 +1,8 @@
+{
+  "pick_reshape": {"y": [1, 1], "x": [1, 50]},
+  "output_dim": [null, 1],
+  "netName": "g50c",
+  "input_dim": [null, 50],
+  "name": "g50c",
+  "multi-label":false
+}
