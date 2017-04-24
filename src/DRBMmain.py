@@ -15,7 +15,7 @@ with open('./config/houston.json', 'r') as f:
 dset = dataset(dconf)
 
 lr = 0.01
-num_hiddens = 2000
+num_hiddens = 512
 
 flags = tf.app.flags\
 # Model input parameters
@@ -24,7 +24,7 @@ flags.DEFINE_integer("num_visible", dconf['data_shape'], "number of visible unit
 flags.DEFINE_integer("num_classes", dconf['nb_class'], "number of classes")
 
 # Learning hyperparameters
-flags.DEFINE_integer("batch_size", 1, "batch size")
+flags.DEFINE_integer("batch_size", 20, "batch size")
 flags.DEFINE_integer("num_epochs", 1, "number of epochs")
 flags.DEFINE_float("learning_rate", lr, "learning rate")
 flags.DEFINE_float("alpha", 0.0, "generative objective weight")

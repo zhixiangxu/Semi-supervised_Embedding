@@ -419,7 +419,7 @@ class Model:
 
         for i in tqdm(range(num_batches)):
         #for i in range(num_batches):
-            x, y, xu = dset.next_batch(self.hparams['batch_size'])
+            x, xu, y = dset.next_batch(self.hparams['batch_size'])
 
             if with_update == True:
                 if debug_learning_rate is not None:

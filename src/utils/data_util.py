@@ -246,9 +246,9 @@ class Remote(object):
         np.roll(self.train['xl'], -nb_batch)
         np.roll(self.train['xu'], -nb_batch)
 
-        tmp = np.vstack([x, xu])
 
-        return tmp, y
+
+        return x, xu, y
 
     def get_test(self, do_one_hot):
         x = self.test['x']

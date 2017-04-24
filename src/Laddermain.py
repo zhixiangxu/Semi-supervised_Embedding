@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 import math
 import os
 import csv
@@ -240,7 +241,9 @@ test_x, test_y = dset.get_test(True)
 print("Initial Accuracy: ", sess.run(accuracy, feed_dict={inputs: test_x, outputs: test_y, training: False}), "%")
 
 for i in tqdm(range(i_iter, int(num_iter))):
-    images, labels = dset.next_batch(batch_size)
+    x__, xu__, y__ = dset.next_batch(batch_size)
+    images = np.vstack([x__, xu__])
+    labels = y__
     sess.run(train_step, feed_dict={inputs: images, outputs: labels, training: True})
     if (i > 1) and ((i+1) % (num_iter/num_epochs) == 0):
         epoch_n = i/(num_examples/batch_size)

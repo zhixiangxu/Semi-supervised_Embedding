@@ -5,5 +5,5 @@ Paper Tree
     ├── DLBookch20.pdf
     ├── DLviaS2E.pdf
     ├── Ladder.pdf
-    ├── MITSSL.pdf
+    ├── LabelProp.pdf
     └── SSLSurvey.pdf

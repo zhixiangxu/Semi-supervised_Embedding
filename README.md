@@ -38,6 +38,20 @@ Read the [pdf problem collection](./Semi-supervised_Embedding_Collection.pdf) ge
 
 # Semi-supervised Experiment Problem Collection
 
+## Summary
+
+Compared with traditional classifiers, semi-supervised learning take the advantage the internel structure of data, labeled and unlabeled. The foundamental presumption of semi-supervised learning is that data within similar structure are likely to have same label. Based on this, scientists have developed different algorithms to capture such similarity amonge labeled and unlabeled data. The basic design of semi-supervised loss is the combination labeled loss with unlabeled loss .
+
+Deep learning via semi-supervised embedding proposed by Weston, Mobahi and Collobert uses the deep neural network to capture the feature, or embed the data. The advantage of this algorithm is that deep neural network has strong ability of feature mapping, thus the embedding for unlabeled data would be more efficient. Deep learning algorithm prepares different losses for labeled and unlabeled data. A big difference between this algorithm and others is that the unlabeled loss does not simply remove the label, but use embedding algorithm. In the experiment, we found that different embedding algorithms would greatly influence the result. 
+
+Besides, we add cluster loss term to the loss. Originally the loss was designed as a combination of supervised loss and embedding algorithm based on manifold or graph(neighbor). To make the computation cheaper, we select the neighbor based on pixel instead of k nearest. The introduce of cluster loss like S3VM for neighbor data would reinforce the presumption. According to the experiment result, the model prefers cluster loss to embedding algorithm.
+
+Semi-supervised discriminative Boltzmann machine was proposed by Larochelle and Bengio. Semi-supervised DRBM loss obey the basic design, it is a compond of labeled and unlabeled losses. Different from deep learning which uses embedding algorithm inside the mode, DRBM simply removes the label infomation from the log loss. This architecture makes the contrastive divergence approximation slightly different supervised DRBM.
+
+Label propagation is a graph-based semi-supervised proposed by Bengio. This algorithm builds a graph with nodes representing the labeled and unlabeled data while edges describe the similarity between them. 
+
+The structure of semi-supervised ladder network proposed by Rasmus is an autoencoder with skip connections from the encoder to decoder. The learning task is similar to that in denoising autoencoders ut applied to every layer, not just the inputs. This architecture would make it easier for the higher layers to represent the details.
+
 ## Deep Learning via Embedding Model
 
 ### Describe Dataset in JSON
@@ -139,10 +153,10 @@ $$ \sum_{ij} L(f_i, f_j, W_{ij}) = \sum_{ij} W_{ij} ||f_i - f_j|| $$
 would give `nan`. There seems some delicate math backend.
 
 And *Siamese Networks* embedding function:
+s
+$$ L(f_i, f_j , W_{ij}) = \max(0, m - ||f_i - f_j||_2)^2,  \text{ if } W_{ij} = 0 $$
 
-$$ L(f_i, f_j , W_{ij}) = \max(0, m− ||f_i − f_j||_2)^2,  \text{ if } W_{ij} = 0 $$
-
-can work when $||f_i − f_j||_2 = (f_i - f_j)^T(f_i - f_j)$ while simple Euclidean distance would not give meaningful results.
+can work when $||f_i - f_j||_2 = (f_i - f_j)^T(f_i - f_j)$ while simple Euclidean distance would not give meaningful results.
 
 ### S3VM loss
 Standard optimization for *S3VM* is:
@@ -211,7 +225,7 @@ For manifold(graph) loss, appropriate neighbor radius may help the accuracy(to a
 
 - Other Model Structure
 Try *Auxiliary EmbedCNN*:
-![Auxiliary EmbedCNN](./image/model2.svg)
+![Auxiliary EmbedCNN](./image/model.png)
 This model gives a relatively high accuracy with `100000` labeled data, `'abs_quadratic'` supervised loss and `'S3VM'` unsupervised loss:
 
 | Alpha    | 0.0    | 1.0    | 0.9    | 0.8    | 0.7    | 0.6    | 0.5    | 0.4    | 0.3    | 0.2    | 0.1    | 0.0    |
@@ -231,7 +245,7 @@ It's better to be noticed that currently it is not easy at all to find a reposit
 ### Discriminative Restricted Boltzmann Machine
 *Semi-supervised DRBM* algorithm is proposed in paper [Classification using Discriminative Restricted Boltzmann Machines](http://www.cs.toronto.edu/~larocheh/publications/drbm-mitacs-poster.pdf):
 
-$$ \mathcal{L}_{\text{semi−sup}} (\mathcal{D}_{\text{train}} , \mathcal{D}_{\text{unlab}}) = \mathcal{L}_{\text{TYPE}}(\mathcal{D}_{\text{train}}) + \beta \mathcal{L}_{\text{unsup}} (\mathcal{D}_{\text{unlab}}) $$
+$$ \mathcal{L}_{\text{semi-sup}} (\mathcal{D}_{\text{train}} , \mathcal{D}_{\text{unlab}}) = \mathcal{L}_{\text{TYPE}}(\mathcal{D}_{\text{train}}) + \beta \mathcal{L}_{\text{unsup}} (\mathcal{D}_{\text{unlab}}) $$
 
 
 $$ = -\sum_{i=1}^{|\mathcal{D}_{\text{train}}|} \log p(y_i | \mathbf{x_i}) - \beta \sum_{i=1}^{|\mathcal{D}_{\text{unlab}}|} \log p(\mathbf{x_i}) $$
